@@ -1,14 +1,34 @@
 catcher_node:
   ros__parameters:
+    # ── Topic names — change to match competition setup ──────────────────
     runner_topic:      "/runner/pose"
     cmd_vel_topic:     "/cmd_vel"
     odom_topic:        "/odom"
     scan_topic:        "/scan"
-    capture_distance:  0.50
-    linear_gain:       0.6
-    angular_gain:      1.5
-    max_linear_speed:  0.30
-    max_angular_speed: 1.50
-    obstacle_distance: 0.40
-    control_rate:      10.0
+
+    # ── Capture ───────────────────────────────────────────────────────────
+    capture_distance:  0.40        # metres — aggressive: stop at 40cm
+
+    # ── Controller gains ──────────────────────────────────────────────────
+    linear_gain:       1.0         # scales speed in close-range sprint
+    angular_gain:      2.5         # snappy turning (higher = faster heading correction)
+
+    # ── Speed limits (TurtleBot 4 Lite hardware max) ──────────────────────
+    max_linear_speed:  0.31        # m/s   — absolute hardware max
+    max_angular_speed: 1.90        # rad/s — absolute hardware max
+
+    # ── Obstacle avoidance ────────────────────────────────────────────────
+    obstacle_distance: 0.45        # metres — LiDAR trigger
+
+    # ── Predictive intercept ──────────────────────────────────────────────
+    predict_time:      0.8         # seconds ahead to predict runner position
+                                   # increase if runner is fast, decrease if slow
+
+    # ── Orient threshold ─────────────────────────────────────────────────
+    orient_threshold:  0.25        # radians (~14°) — rotate in place if error > this
+
+    # ── Control loop ─────────────────────────────────────────────────────
+    control_rate:      20.0        # Hz — 20Hz for fast response
+
+    # ── Simulation clock ─────────────────────────────────────────────────
     use_sim_time:      true
