@@ -1,0 +1,37 @@
+# ---------------------------------------------------------------------------
+# Catcher node tuning parameters
+# ---------------------------------------------------------------------------
+# You can also load this file via:
+#   ros2 launch turtlebot_catcher catcher.launch.py params_file:=config/catcher_params.yaml
+# (requires adding a params_file launch argument — see README for details)
+#
+# To apply directly:
+#   ros2 run turtlebot_catcher catcher_node --ros-args --params-file config/catcher_params.yaml
+
+catcher_node:
+  ros__parameters:
+    # ── Topic names ── change these to match the competition setup ───────
+    runner_topic:      "/runner/pose"   # PoseStamped topic for the runner
+    cmd_vel_topic:     "/cmd_vel"       # TurtleBot velocity commands
+    odom_topic:        "/odom"          # TurtleBot odometry
+    scan_topic:        "/scan"          # TurtleBot LiDAR
+
+    # ── Capture ──────────────────────────────────────────────────────────
+    capture_distance:  0.50             # metres — stop and declare victory
+
+    # ── Controller gains ─────────────────────────────────────────────────
+    linear_gain:       0.6              # speed ∝ distance × gain
+    angular_gain:      1.5              # turn rate ∝ heading_error × gain
+
+    # ── Speed limits (TurtleBot 4 Lite max: 0.31 m/s, 1.9 rad/s) ────────
+    max_linear_speed:  0.30
+    max_angular_speed: 1.50
+
+    # ── Obstacle avoidance ───────────────────────────────────────────────
+    obstacle_distance: 0.40             # metres — LiDAR trigger distance
+
+    # ── Control loop ─────────────────────────────────────────────────────
+    control_rate:      10.0             # Hz
+
+    # ── Simulation clock ─────────────────────────────────────────────────
+    use_sim_time:      true

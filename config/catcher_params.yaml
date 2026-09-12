@@ -1,0 +1,14 @@
+catcher_node:
+  ros__parameters:
+    runner_topic:      "/runner/pose"
+    cmd_vel_topic:     "/cmd_vel"
+    odom_topic:        "/odom"
+    scan_topic:        "/scan"
+    capture_distance:  0.50
+    linear_gain:       0.6
+    angular_gain:      1.5
+    max_linear_speed:  0.30
+    max_angular_speed: 1.50
+    obstacle_distance: 0.40
+    control_rate:      10.0
+    use_sim_time:      true
